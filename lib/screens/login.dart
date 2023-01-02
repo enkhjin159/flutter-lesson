@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:movie/providers/common.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -11,12 +10,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _fromKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   final _phoneCtrl = TextEditingController();
   final _passCtrl = TextEditingController();
-  void onSubmit() {
-    if (_fromKey.currentState!.validate()) {
-      print("Amjilttai");
+
+  void _onSubmit() {
+    if (_formKey.currentState!.validate()) {
+      Provider.of<CommonProvider>(context, listen: false).onLogin();
     }
   }
 
@@ -25,35 +25,36 @@ class _LoginPageState extends State<LoginPage> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
       child: Form(
-        key: _fromKey,
+        key: _formKey,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Let's sign you",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 34,
-                        fontWeight: FontWeight.bold)),
                 Text(
-                  "Welcome back",
+                  "Let's sign you in.",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 34,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  "Welcome back.",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 28,
                   ),
                 ),
                 Text(
-                  "You've been missed",
+                  "You've been missed!",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 28,
                   ),
                 ),
-                SizedBox(
-                  height: 30,
-                ),
+                SizedBox(height: 30),
                 TextFormField(
                   controller: _phoneCtrl,
                   validator: (value) {
@@ -66,16 +67,20 @@ class _LoginPageState extends State<LoginPage> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide(
-                          color: Colors.white.withOpacity(0.9), width: 1),
+                        color: Colors.white.withOpacity(0.6),
+                        width: 1,
+                      ),
                     ),
-                    labelStyle: TextStyle(color: Colors.white.withOpacity(0.6)),
+                    labelStyle: TextStyle(
+                      color: Colors.white.withOpacity(0.6),
+                    ),
                     label: Text("Утасны дугаар"),
                   ),
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: 20),
                 TextFormField(
                   controller: _passCtrl,
                   obscureText: true,
@@ -89,12 +94,18 @@ class _LoginPageState extends State<LoginPage> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide(
-                          color: Colors.white.withOpacity(0.9), width: 1),
+                        color: Colors.white.withOpacity(0.6),
+                        width: 1,
+                      ),
                     ),
-                    labelStyle: TextStyle(color: Colors.white.withOpacity(0.6)),
-                    label: Text("нууц үг"),
+                    labelStyle: TextStyle(
+                      color: Colors.white.withOpacity(0.6),
+                    ),
+                    label: Text("Нууц үг"),
                   ),
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ],
             ),
@@ -106,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                   backgroundColor: MaterialStateProperty.all(Colors.white),
                   foregroundColor: MaterialStateProperty.all(Colors.black),
                 ),
-                onPressed: onSubmit,
+                onPressed: _onSubmit,
                 child: Text("Нэвтрэх"),
               ),
             ),
