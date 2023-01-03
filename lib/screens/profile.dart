@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+// import 'package:image_picker/image_picker.dart';
 import 'package:movie/global_keys.dart';
 import 'package:movie/providers/common.dart';
 import 'package:movie/screens/login.dart';
@@ -18,10 +18,10 @@ class ProfilePage extends StatelessWidget {
     }
   }
 
-  void _onImagePick(ImageSource source) async {
-    XFile? file = await ImagePicker().pickImage(source: source);
-    print(file?.name);
-  }
+  // void _onImagePick(ImageSource source) async {
+  //   XFile? file = await ImagePicker().pickImage(source: source);
+  //   print(file?.name);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +31,12 @@ class ProfilePage extends StatelessWidget {
               child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                    onPressed: () => _onImagePick(ImageSource.gallery),
-                    child: Text("Зургийн сан нээх")),
-                ElevatedButton(
-                    onPressed: () => _onImagePick(ImageSource.camera),
-                    child: Text("Камера нээх")),
+                // ElevatedButton(
+                //     onPressed: () => _onImagePick(ImageSource.gallery),
+                //     child: Text("Зургийн сан нээх")),
+                // ElevatedButton(
+                //     onPressed: () => _onImagePick(ImageSource.camera),
+                //     child: Text("Камера нээх")),
                 ElevatedButton(
                     onPressed: _onChangeLanguage,
                     child: Text(content.locale.languageCode)),
